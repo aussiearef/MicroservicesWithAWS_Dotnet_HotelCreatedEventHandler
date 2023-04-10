@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0"/>
+        <PackageReference Include="Amazon.Lambda.SNSEvents" Version="2.0.0"/>
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.102.22"/>
+    </ItemGroup>
+
+</Project>
