@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCreatedEventHandler", "HotelCreatedEventHandler\HotelCreatedEventHandler.csproj", "{9E6CACF8-2FF6-4717-940A-1A3B2FA49262}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelCreatedEventHandler.Test", "HotelCreatedEventHandler.Test\HotelCreatedEventHandler.Test.csproj", "{B2B486B0-2226-4808-A802-F431E8AF0BD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9E6CACF8-2FF6-4717-940A-1A3B2FA49262}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E6CACF8-2FF6-4717-940A-1A3B2FA49262}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E6CACF8-2FF6-4717-940A-1A3B2FA49262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B486B0-2226-4808-A802-F431E8AF0BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B486B0-2226-4808-A802-F431E8AF0BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B486B0-2226-4808-A802-F431E8AF0BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B486B0-2226-4808-A802-F431E8AF0BD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

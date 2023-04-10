@@ -10,6 +10,7 @@
         <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0"/>
         <PackageReference Include="Amazon.Lambda.SNSEvents" Version="2.0.0"/>
         <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.102.22"/>
+        <PackageReference Include="NEST" Version="7.17.5"/>
     </ItemGroup>
 
 </Project>
