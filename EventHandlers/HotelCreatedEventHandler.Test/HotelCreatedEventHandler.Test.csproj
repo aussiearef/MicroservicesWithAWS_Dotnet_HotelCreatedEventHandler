@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HotelCreatedEventHandler\HotelCreatedEventHandler.csproj" />
+        <ProjectReference Include="..\HotelCreatedEventHandler\HotelCreatedEventHandler.csproj"/>
     </ItemGroup>
 
 </Project>

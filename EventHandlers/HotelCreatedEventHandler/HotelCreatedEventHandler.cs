@@ -1,9 +1,13 @@
 ﻿using System.Text.Json;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
+using Amazon.Lambda.Core;
+using Amazon.Lambda.Serialization.SystemTextJson;
 using Amazon.Lambda.SNSEvents;
 using HotelCreatedEventHandler.Models;
 using Nest;
+
+[assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
 
 namespace HotelCreatedEventHandler;
 
@@ -11,6 +15,7 @@ public class HotelCreatedEventHandler
 {
     public async Task Handler(SNSEvent snsEvent)
     {
+        Console.WriteLine("Lambda was invoked.");
         var dbClient = new AmazonDynamoDBClient();
         var table = Table.LoadTable(dbClient, "hotel-created-event-ids");
 
@@ -19,14 +24,16 @@ public class HotelCreatedEventHandler
         var password = Environment.GetEnvironmentVariable("password");
         var indexName = Environment.GetEnvironmentVariable("indexName");
 
-        var connSetting = new ConnectionSettings(new Uri(host));
-        connSetting.BasicAuthentication(userName, password);
-        connSetting.DefaultIndex(indexName);
-        connSetting.DefaultMappingFor<Hotel>(m => m.IdProperty(p => p.Id));
+        var connSettings = new ConnectionSettings(new Uri(host));
+        connSettings.BasicAuthentication(userName, password);
+        connSettings.DefaultIndex(indexName);
+        connSettings.DefaultMappingFor<Hotel>(m => m.IdProperty(p => p.Id));
 
-        var client = new ElasticClient(connSetting);
+        var esClient = new ElasticClient(connSettings);
 
-        if (!(await client.Indices.ExistsAsync(indexName)).Exists) await client.Indices.CreateAsync(indexName);
+        if (!(await esClient.Indices.ExistsAsync(indexName)).Exists) await esClient.Indices.CreateAsync(indexName);
+
+        Console.WriteLine($"Found {snsEvent.Records.Count} records in SNS Event");
 
         foreach (var eventRecord in snsEvent.Records)
         {
@@ -39,7 +46,9 @@ public class HotelCreatedEventHandler
                 });
 
             var hotel = JsonSerializer.Deserialize<Hotel>(eventRecord.Sns.Message);
-            await client.IndexDocumentAsync<Hotel>(hotel);
+
+            var response = await esClient.IndexDocumentAsync<Hotel>(hotel);
+            if (response.Result == Result.Error) Console.WriteLine($"Server Error:{response.ServerError.Error.Reason}");
         }
     }
 }

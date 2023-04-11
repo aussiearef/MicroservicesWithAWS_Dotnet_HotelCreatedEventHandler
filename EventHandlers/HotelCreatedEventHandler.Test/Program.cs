@@ -1,36 +1,36 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+
 using System.Text.Json;
 using Amazon.Lambda.SNSEvents;
 using HotelCreatedEventHandler.Models;
 
-
-Environment.SetEnvironmentVariable("host","");
-Environment.SetEnvironmentVariable("userName","elastic");
-Environment.SetEnvironmentVariable("password","");
+Environment.SetEnvironmentVariable("host", "https://hotels.es.australia-southeast1.gcp.elastic-cloud.com");
+Environment.SetEnvironmentVariable("userName", "elastic");
+Environment.SetEnvironmentVariable("password", "OQP989jVTMLH3S4ew52gylj9");
 Environment.SetEnvironmentVariable("indexName", "event");
 
-var hotel = new Hotel()
+var hotel = new Hotel
 {
     Name = "Continental",
-    City = "Paris",
-    Id = "1",
+    CityName = "Paris",
     Price = 100,
     Rating = 4,
-    UserId = "1234",
+    Id = "123",
+    UserId = "ABC",
     CreationDateTime = DateTime.Now
 };
 
-var snsEvent = new SNSEvent()
+var snsEvent = new SNSEvent
 {
-    Records = new List<SNSEvent.SNSRecord>()
+    Records = new List<SNSEvent.SNSRecord>
     {
-        new SNSEvent.SNSRecord()
+        new()
         {
-            Sns = new SNSEvent.SNSMessage()
+            Sns = new SNSEvent.SNSMessage
             {
-                Message = JsonSerializer.Serialize(hotel),
-                MessageId = "123"
+                MessageId = "100",
+                Message = JsonSerializer.Serialize(hotel)
             }
         }
     }
@@ -38,4 +38,3 @@ var snsEvent = new SNSEvent()
 
 var handler = new HotelCreatedEventHandler.HotelCreatedEventHandler();
 await handler.Handler(snsEvent);
-
