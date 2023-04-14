@@ -1,6 +1,6 @@
 # Hotel Created Event Handler (Search Domain)
 
-Inline-style: 
+
 ![Microservices with .NET and AWS ](https://img-b.udemycdn.com/course/750x422/2080118_8bbf_7.jpg "Microservices with .NET and AWS")
 
 
